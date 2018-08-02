@@ -66,11 +66,13 @@ public class ProdutoDAO {
             
             String json = jedis.get(c);
             
-            System.out.println(json);   
+            Produto p = gson.fromJson(json, Produto.class);
+            
+            System.out.println(p);   
             
         }else {  
             
-            String a = String.valueOf(dao.buscar(codigo));            
+            String a = gson.toJson(dao.buscar(codigo));            
             jedis.setex(c, 1800, a);
                       
             
